@@ -63,14 +63,21 @@ if st.session_state.chat_pilli:
                 st.markdown(message["content"])
             elif re.search("#CODE-03#", message["content"]) != None:
                 if st.session_state.checkbox == False:
-                    st.markdown("Thanks for donating!!")
-                else:
                     nudge = "A donation of €1 will be made on your behalf to the charity organization DRI.\
-                    Please let me know if you would like to change it. The total grocery bill is €14."
+                    Please let me know if you would like to change it."
                     def changed():
                         st.session_state.checkbox = False
-                    # st.write(nudge)
+                    st.write("The total grocery bill is €14 including taxes.")
+                    st.session_state.checkbox = st.checkbox(nudge, value= False, on_change=changed)
+                    st.write("Thanks for your preference, Would you like to checkout?")
+                else:
+                    nudge = "A donation of €1 will be made on your behalf to the charity organization DRI.\
+                    Please let me know if you would like to change it."
+                    def changed():
+                        st.session_state.checkbox = False
+                    st.write("The total grocery bill is €14 including taxes.")
                     st.session_state.checkbox = st.checkbox(nudge, value= True, on_change=changed)
+                    st.write("Would you like to checkout?")
             elif re.search("#CODE-09#", message["content"]) != None:
                     st.write("Submit the following code:", st.session_state.thread_id)
                     st.write("Thanks for participating, you may click the finish button")
@@ -78,11 +85,13 @@ if st.session_state.chat_pilli:
                 st.markdown(message["content"])
 
         
-    if prompt := st.chat_input("Show me what you got."):
+    if prompt := st.chat_input("Hi, I want to shop."):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
 
+        if st.session_state.checkbox == False:
+            prompt = "Checkbox state is false. I want to checkout."
 
         client.beta.threads.messages.create(
                 thread_id=st.session_state.thread_id,
@@ -130,13 +139,14 @@ if st.session_state.chat_pilli:
             with st.chat_message("assistant"):
                 if re.search("#CODE-03#", message.content[0].text.value) != None:
                     nudge = "A donation of €1 will be made on your behalf to the charity organization DRI.\
-                    Please let me know if you would like to change it. The total grocery bill is €14."
+                    Please let me know if you would like to change it. "
                     def changed():
                         st.session_state.checkbox = False
-                    # st.write(nudge)
+                    st.write("The total grocery bill is €14 including taxes.")
                     st.session_state.checkbox = st.checkbox(nudge, value= True, on_change=changed)
+                    st.write("Would you like to checkout?")
                 elif re.search("#CODE-09#", message.content[0].text.value) != None:
-                    st.write("Submit the following code:", st.session_state.thread_id)
+                    st.write("Submit the following code:", str(st.session_state.thread_id).replace("thread_", ""))
                     st.write("Thanks for participating, you may click the finish button")
                 else: 
                     st.markdown(message.content[0].text.value)
