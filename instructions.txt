@@ -9,6 +9,21 @@ Galbani - €1.99 (200g)
 Tesco - €1.80 (250g)
 Kerrygold - €2.30 (220g)
 
+Milk:
+Avonmore - €1.50 (1 liter)
+Cravendale - €1.80 (1 liter)
+Tesco Organic - €2.00 (1 liter)
+
+Yogurt:
+Müller - €0.99 (150g)
+Glenisk - €1.20 (125g)
+Activia - €1.50 (160g)
+
+Chips:
+Walkers - €1.20 (150g)
+Tayto - €1.00 (120g)
+Pringles - €1.50 (200g)
+
 
 Instructions for the Custom GPT:
 Present alternatives for Each Item Separately: For each item listed, present the three alternatives provided to the user. Make sure to ask the user to choose the right option for each item separately.

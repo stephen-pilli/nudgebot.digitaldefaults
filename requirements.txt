@@ -1,4 +1,2 @@
 streamlit
 openai
-gcsfs
-st-files-connection
